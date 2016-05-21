@@ -15,7 +15,7 @@ namespace Demo
 		[STAThread]
 		private static void Main()
 		{
-			app = FileIoApp.Create(CsvToTab);
+			app = FileIoApp.Create(CsvToTab, OnFailure);
 			app.Title = "Demo app";
 			app.OpenFile.LabelText = "Input CSV file: ";
 			app.OpenFile.Dialog.Filter = "CSV files|*.csv";
@@ -40,6 +40,11 @@ namespace Demo
 					fields = reader.ReadFields();
 				}
 			}
+		}
+
+		private static void OnFailure(Exception e)
+		{
+			app.SaveFile.File.Delete();
 		}
 	}
 }

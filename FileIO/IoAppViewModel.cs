@@ -51,7 +51,7 @@ namespace FileIO
 			set { this.RaiseAndSetIfChanged(ref title, value); }
 		}
 
-		internal IoAppViewModel(FileIoApp context, Action work)
+		internal IoAppViewModel(ApplicationContext context, Action work, Action<Exception> onFailure)
 		{
 			this.context = context;
 			var isInProgress = this.WhenAnyValue(me => me.TokenSource).Select(source => source != null).ObserveOn(Dispatcher.CurrentDispatcher);
@@ -65,15 +65,24 @@ namespace FileIO
 			};
 			worker.RunWorkerCompleted += (o, e) =>
 			{
-				if (!TokenSource.IsCancellationRequested)
-				{
-					new ExportCompletedWindow(new ExportCompletedViewModel(Title, SaveFile.File)).ShowDialog();
-				}
-				else
+				if (TokenSource.IsCancellationRequested)
 				{
 					Progress = 0;
 				}
+				else if (e.Error != null)
+				{
+					System.Windows.MessageBox.Show(Owner, e.Error.Message, Title, MessageBoxButton.OK, MessageBoxImage.Error);
+					Progress = 0;
+				}
+				else
+				{
+					new ExportCompletedWindow(new ExportCompletedViewModel(Title, SaveFile.File)) {Owner = Owner}.ShowDialog();
+				}
 				TokenSource = null;
+				if (e.Error != null)
+				{
+					onFailure(e.Error);
+				}
 			};
 			worker.ProgressChanged += (o, e) => Progress = e.ProgressPercentage;
 			StartCommand = ReactiveCommand.Create(this.WhenAnyValue(me => me.OpenFile.File, me => me.SaveFile.File, me => me.TokenSource)

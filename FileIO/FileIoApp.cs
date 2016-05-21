@@ -6,10 +6,10 @@ namespace FileIO
 {
 	public class FileIoApp : ApplicationContext
 	{
-		public static IApp Create(Action work)
+		public static IApp Create(Action work, Action<Exception> onFailure)
 		{
 			var context = new FileIoApp();
-			var app = new IoAppViewModel(context, work);
+			var app = new IoAppViewModel(context, work, onFailure);
 			var ioWindow = new IoWindow(app);
 			app.Owner = ioWindow;
 			ioWindow.Closed += (o, e) => context.ExitThread();
