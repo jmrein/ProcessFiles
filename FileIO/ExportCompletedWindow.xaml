@@ -1,0 +1,22 @@
+﻿<Window x:Class="FileIO.ExportCompletedWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FileIO"
+        mc:Ignorable="d"
+        Title="ExportCompletedWindow" SizeToContent="WidthAndHeight" d:DataContext="{d:DesignInstance local:ExportCompletedViewModel}">
+  <Window.Resources>
+    <ResourceDictionary Source="Resources.xaml"/>
+  </Window.Resources>
+  <StackPanel>
+    <TextBlock Margin="{StaticResource DialogMargin}">Export completed.</TextBlock>
+    <Border Style="{StaticResource ButtonBar}">
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+        <Button Command="{Binding OpenFileCommand}">Open</Button>
+        <Button Command="{Binding OpenFolderCommand}">Open folder</Button>
+        <Button Command="{Binding CloseCommand}">Close</Button>
+      </StackPanel>
+    </Border>
+  </StackPanel>
+</Window>
