@@ -49,9 +49,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FileIO\FileIO.csproj">
+    <ProjectReference Include="..\ProcessFiles\ProcessFiles.csproj">
       <Project>{df49dc7d-8427-4bc3-84ec-3d41640124cf}</Project>
-      <Name>FileIO</Name>
+      <Name>ProcessFiles</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

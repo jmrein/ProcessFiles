@@ -7,11 +7,11 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FileIO")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("ProcessFiles")]
+[assembly: AssemblyDescription("Library for creating simple file processing applications")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FileIO")]
+[assembly: AssemblyCompany("Joel Rein")]
+[assembly: AssemblyProduct("ProcessFiles")]
 [assembly: AssemblyCopyright("Copyright © Joel Rein 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

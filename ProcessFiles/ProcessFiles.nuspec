@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://opensource.org/licenses/BSD-3-Clause</licenseUrl>
+    <projectUrl>https://github.com/jmrein/ProcessFiles</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <copyright>Copyright Joel Rein 2016</copyright>
+    <dependencies>
+      <dependency id="Splat" version="1.6.2" />
+      <dependency id="reactiveui-core" version="6.5.0" />
+    </dependencies>
+  </metadata>
+</package>

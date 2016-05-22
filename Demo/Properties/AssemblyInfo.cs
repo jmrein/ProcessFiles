@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Demo")]
+[assembly: AssemblyProduct("ProcessFiles demo app")]
 [assembly: AssemblyCopyright("Copyright © Joel Rein 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

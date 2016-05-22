@@ -1,4 +1,12 @@
-﻿using System;
+﻿/* IoWindowViewModel.cs
+ *
+ * Copyright (C) 2016 Joel Rein
+ * All rights reserved.
+ *
+ * This software may be modified and distributed under the terms
+ * of the BSD license.  See the LICENSE file for details.
+ */
+using System;
 using System.ComponentModel;
 using System.IO;
 using System.Reactive.Linq;
@@ -8,13 +16,13 @@ using System.Windows.Threading;
 using Microsoft.Win32;
 using ReactiveUI;
 
-namespace FileIO
+namespace ProcessFiles
 {
-	internal class IoAppViewModel : ReactiveObject, IApp
+	internal class IoWindowViewModel : ReactiveObject, IApp
 	{
 		private readonly BackgroundWorker worker = new BackgroundWorker {WorkerReportsProgress = true};
 		private readonly ObservableAsPropertyHelper<bool> isInProgressHelper;
-		private readonly FileIoApp context;
+		private readonly ProcessFilesApp context;
 		private CancellationTokenSource tokenSource;
 		private CancellationToken cancellationToken;
 		private float progress;
@@ -51,7 +59,7 @@ namespace FileIO
 			set { this.RaiseAndSetIfChanged(ref title, value); }
 		}
 
-		internal IoAppViewModel(ApplicationContext context, Action work, Action<Exception> onFailure)
+		internal IoWindowViewModel(ProcessFilesApp context, Action work, Action<Exception> onFailure)
 		{
 			this.context = context;
 			var isInProgress = this.WhenAnyValue(me => me.TokenSource).Select(source => source != null).ObserveOn(Dispatcher.CurrentDispatcher);
@@ -71,7 +79,7 @@ namespace FileIO
 				}
 				else if (e.Error != null)
 				{
-					System.Windows.MessageBox.Show(Owner, e.Error.Message, Title, MessageBoxButton.OK, MessageBoxImage.Error);
+					MessageBox.Show(Owner, e.Error.Message, Title, MessageBoxButton.OK, MessageBoxImage.Error);
 					Progress = 0;
 				}
 				else
