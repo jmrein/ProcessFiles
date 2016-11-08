@@ -84,7 +84,11 @@ namespace ProcessFiles
 				}
 				else
 				{
-					new ExportCompletedWindow(new ExportCompletedViewModel(Title, SaveFile.File)) {Owner = Owner}.ShowDialog();
+					new ExportCompletedWindow(new ExportCompletedViewModel(Title, SaveFile.File))
+					{
+						Owner = Owner,
+						WindowStartupLocation = WindowStartupLocation.CenterOwner
+					}.ShowDialog();
 				}
 				TokenSource = null;
 				if (e.Error != null)
