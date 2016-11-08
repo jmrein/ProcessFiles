@@ -59,7 +59,7 @@ namespace ProcessFiles
 			set { this.RaiseAndSetIfChanged(ref title, value); }
 		}
 
-		internal IoWindowViewModel(ProcessFilesApp context, Action work, Action<Exception> onFailure)
+		internal IoWindowViewModel(ProcessFilesApp context, Action<IApp> work, Action<IApp, Exception> onFailure)
 		{
 			this.context = context;
 			var isInProgress = this.WhenAnyValue(me => me.TokenSource).Select(source => source != null).ObserveOn(Dispatcher.CurrentDispatcher);
@@ -68,7 +68,7 @@ namespace ProcessFiles
 			SaveFile = new OutputFileBrowseViewModel(isInProgress.Select(f => !f), OpenFile);
 			worker.DoWork += (o, e) =>
 			{
-				work();
+				work(this);
 				e.Result = 0;
 			};
 			worker.RunWorkerCompleted += (o, e) =>
@@ -93,7 +93,7 @@ namespace ProcessFiles
 				TokenSource = null;
 				if (e.Error != null)
 				{
-					onFailure(e.Error);
+					onFailure?.Invoke(this, e.Error);
 				}
 			};
 			worker.ProgressChanged += (o, e) => Progress = e.ProgressPercentage;

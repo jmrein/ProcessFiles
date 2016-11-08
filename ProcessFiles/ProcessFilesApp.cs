@@ -14,7 +14,7 @@ namespace ProcessFiles
 {
 	public class ProcessFilesApp : ApplicationContext
 	{
-		public static IApp Create(Action work, Action<Exception> onFailure)
+		public static IApp Create(Action<IApp> work, Action<IApp, Exception> onFailure)
 		{
 			var context = new ProcessFilesApp();
 			var app = new IoWindowViewModel(context, work, onFailure);

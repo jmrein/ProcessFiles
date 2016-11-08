@@ -10,12 +10,10 @@ namespace Demo
 {
 	internal static class Program
 	{
-		private static IApp app;
-
 		[STAThread]
 		private static void Main()
 		{
-			app = ProcessFilesApp.Create(SlowCsvToTab, OnFailure);
+			var app = ProcessFilesApp.Create(SlowCsvToTab, null);
 			app.Title = "Demo app";
 			app.OpenFile.LabelText = "Input CSV file: ";
 			app.OpenFile.Dialog.Filter = "CSV files|*.csv";
@@ -24,7 +22,7 @@ namespace Demo
 			app.Start();
 		}
 
-		private static void SlowCsvToTab()
+		private static void SlowCsvToTab(IApp app)
 		{
 			using (var stream = app.OpenFile.File.OpenRead())
 			using (var reader = new TextFieldParser(stream) { Delimiters = new[] { CultureInfo.CurrentCulture.TextInfo.ListSeparator } })
@@ -42,7 +40,7 @@ namespace Demo
 			}
 		}
 
-		private static void OnFailure(Exception e)
+		private static void OnFailure(IApp app, Exception e)
 		{
 			app.SaveFile.File.Delete();
 		}
