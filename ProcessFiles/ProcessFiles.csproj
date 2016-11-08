@@ -114,8 +114,10 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <None Include="pack.ps1" />
     <None Include="packages.config" />
     <AppDesigner Include="Properties\" />
+    <None Include="ProcessFiles.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
