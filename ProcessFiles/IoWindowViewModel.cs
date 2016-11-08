@@ -64,8 +64,8 @@ namespace ProcessFiles
 			this.context = context;
 			var isInProgress = this.WhenAnyValue(me => me.TokenSource).Select(source => source != null).ObserveOn(Dispatcher.CurrentDispatcher);
 			isInProgressHelper = this.WhenAnyValue(me => me.TokenSource).Select(source => source != null).ToProperty(this, me => me.IsInProgress, true);
-			OpenFile = new FileBrowseViewModel(isInProgress.Select(f => !f)) {Dialog = new OpenFileDialog()};
-			SaveFile = new FileBrowseViewModel(isInProgress.Select(f => !f)) {Dialog = new SaveFileDialog(), LabelText = "Output file: "};
+			OpenFile = new InputFileBrowseViewModel(isInProgress.Select(f => !f));
+			SaveFile = new OutputFileBrowseViewModel(isInProgress.Select(f => !f), OpenFile);
 			worker.DoWork += (o, e) =>
 			{
 				work();
@@ -108,7 +108,7 @@ namespace ProcessFiles
 
 		private bool CanStart(Tuple<FileInfo, FileInfo, CancellationTokenSource> args)
 		{
-			return OpenFile.File?.Exists == true && SaveFile.File?.Directory?.Exists == true && TokenSource == null;
+			return OpenFile.File != null && SaveFile.File != null && TokenSource == null;
 		}
 
 		public void Start()

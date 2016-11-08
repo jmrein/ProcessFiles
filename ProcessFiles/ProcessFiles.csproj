@@ -94,6 +94,9 @@
       <DependentUpon>FileBrowse.xaml</DependentUpon>
     </Compile>
     <Compile Include="FileBrowseViewModel.cs" />
+    <Compile Include="InputFileBrowseViewModel.cs" />
+    <Compile Include="IsNullToVisibilityConverter.cs" />
+    <Compile Include="OutputFileBrowseViewModel.cs" />
     <Compile Include="ProcessFilesApp.cs" />
     <Compile Include="IApp.cs" />
     <Compile Include="IBrowseForFiles.cs" />

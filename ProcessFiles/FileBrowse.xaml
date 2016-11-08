@@ -7,7 +7,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance local:FileBrowseViewModel}">
   <UserControl.Resources>
-    <ResourceDictionary Source="Resources.xaml"/>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Resources.xaml"/>
+      </ResourceDictionary.MergedDictionaries>
+      <local:IsNullToVisibilityConverter x:Key="IsNullToVisibilityConverter"/>
+    </ResourceDictionary>
   </UserControl.Resources>
     <Grid>
       <Grid.ColumnDefinitions>
@@ -15,8 +20,27 @@
         <ColumnDefinition Width="*" MinWidth="200"/>
         <ColumnDefinition Width="Auto" SharedSizeGroup="Browse"/>
       </Grid.ColumnDefinitions>
-      <TextBlock Text="{Binding LabelText}" DockPanel.Dock="Left" Style="{StaticResource MarginElement}" Grid.Column="0"/>
-      <TextBox Text="{Binding Location, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsEnabled}" Style="{StaticResource MarginElement}" Grid.Column="1"/>
-      <Button Content="{Binding BrowseText}" Command="{Binding BrowseCommand}" Grid.Column="2"/>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+      <TextBlock Text="{Binding LabelText}" DockPanel.Dock="Left" VerticalAlignment="Center"
+                 Grid.Row="0" Grid.Column="0"/>
+      <TextBox Text="{Binding Location, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsEnabled}" Style="{StaticResource LeftMargin}"
+               Grid.Row="0" Grid.Column="1"/>
+      <Button Content="{Binding BrowseText}" Command="{Binding BrowseCommand}" Grid.Row="0" Grid.Column="2"/>
+      <Border Style="{StaticResource ErrorBox}" Grid.Row="1" Grid.Column="1"
+              Visibility="{Binding Error, Converter={StaticResource IsNullToVisibilityConverter}}">
+        <DockPanel>
+          <Viewbox Width="12" Height="12">
+            <Grid Width="256" Height="256">
+              <Ellipse Fill="Red"/>
+              <Line X1="64" X2="192" Y1="64" Y2="192" Stroke="White" StrokeThickness="48"/>
+              <Line X1="64" X2="192" Y1="192" Y2="64" Stroke="White" StrokeThickness="48"/>
+            </Grid>
+          </Viewbox>
+          <TextBlock Text="{Binding Error}" TextWrapping="Wrap" Style="{StaticResource LeftMargin}"/>
+        </DockPanel>
+      </Border>
     </Grid>
 </UserControl>

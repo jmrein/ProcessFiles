@@ -8,7 +8,19 @@
   <Style TargetType="FrameworkElement" x:Key="MarginElement">
     <Setter Property="Margin" Value="4"/>
   </Style>
-  <Style TargetType="Button" BasedOn="{StaticResource MarginElement}">
+  <Style TargetType="FrameworkElement" x:Key="LeftMargin">
+    <Setter Property="Margin" Value="4,0,0,0"/>
+  </Style>
+  <Style TargetType="TextBox">
+    <Setter Property="Height" Value="20"/>
+  </Style>
+  <Style TargetType="Button" BasedOn="{StaticResource LeftMargin}">
     <Setter Property="Width" Value="80"/>
+  </Style>
+  <Style TargetType="Border" x:Key="ErrorBox" BasedOn="{StaticResource LeftMargin}">
+    <Setter Property="BorderBrush" Value="Red"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="Background" Value="#fcc"/>
+    <Setter Property="Padding" Value="2"/>
   </Style>
 </ResourceDictionary>

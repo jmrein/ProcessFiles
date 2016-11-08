@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProcessFiles"
         mc:Ignorable="d" d:DataContext="{d:DesignInstance local:IoWindowViewModel}"
-        Title="IoWindow" Width="450" Height="180" ResizeMode="NoResize">
+        Title="IoWindow" Width="450" SizeToContent="Height">
   <Window.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
@@ -27,8 +27,8 @@
         <RowDefinition Height="Auto"/>
         <RowDefinition Height="Auto"/>
       </Grid.RowDefinitions>
-      <local:FileBrowse DataContext="{Binding OpenFile, Mode=OneWay}"/>
-      <local:FileBrowse DataContext="{Binding SaveFile, Mode=OneWay}" Grid.Row="1"/>
+      <local:FileBrowse DataContext="{Binding OpenFile, Mode=OneWay}" Style="{StaticResource MarginElement}"/>
+      <local:FileBrowse DataContext="{Binding SaveFile, Mode=OneWay}" Style="{StaticResource MarginElement}" Grid.Row="1"/>
       <ProgressBar Grid.Row="2" Minimum="0" Maximum="100" Height="20" Value="{Binding Progress, Converter={StaticResource PercentageConverter}}" Style="{StaticResource MarginElement}"/>
     </Grid>
   </DockPanel>
